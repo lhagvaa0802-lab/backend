@@ -192,19 +192,13 @@
 //   console.log(`Example app listening on port http://localhost:${port}`);
 // });
 
-// let books = [
-//   {
-//     bookId: 1,
-//     title: "Harry-1",
-//     author: "Dorj",
-//   },
 
-//   {
-//     bookId: 2,
-//     title: "Harry-2",
-//     author: "Dorj",
-//   },
-// ];
+
+// app.get("/test", (req, res) => {
+//   res.send(`Та ${req.path} зам руу ${req.method} хүсэлт илгээлээ`);
+// });
+
+
 
 import express from "express";
 import dotenv from "dotenv";
