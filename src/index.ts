@@ -141,12 +141,12 @@
 //   res.status(200).send(updatedTodos);
 // });
 
-import express from "express";
-import type { Response, Request } from "express";
+// import express from "express";
+// import type { Response, Request } from "express";
 
-const app = express();
-const port = "3000";
-app.use(express.json());
+// const app = express();
+// const port = "3000";
+// app.use(express.json());
 
 // app.get("/student/:name", (req: Request, res: Response) => {
 //   const { name } = req.params;
@@ -192,43 +192,45 @@ app.use(express.json());
 //   console.log(`Example app listening on port http://localhost:${port}`);
 // });
 
-// let books = [
-//   {
-//     bookId: 1,
-//     title: "Harry-1",
-//     author: "Dorj",
-//   },
+// app.get("/test", (req, res) => {
+//   res.send(`Та ${req.path} зам руу ${req.method} хүсэлт илгээлээ`);
+// });
 
-//   {
-//     bookId: 2,
-//     title: "Harry-2",
-//     author: "Dorj",
-//   },
-// ];
+import express from "express";
+import dotenv from "dotenv";
 
-app.get("/library/:category/:bookId", (req: Request, res: Response) => {
+dotenv.config();
+
+const app = express();
+const port = 3000;
+
+app.get("/library/:category/:bookId", (req, res) => {
   const { category, bookId } = req.params;
   const { lang } = req.query;
-  const ValidationToken = 12347999;
-  const token = String(req.headers.authorization).split(" ").slice(1);
 
-  if (String(token) === String(ValidationToken)) {
-    return res.status(200).send({
-      status: "Амжилттай",
-      request_info: {
-        method: req.method,
-        path: req.path,
-      },
-      extracted_data: {
-        category: category
-        id: bookId
-        language: lang,
-        auth: res.status,
-      },
+  const apiKey = req.headers["x-api-key"];
+
+  if (apiKey !== process.env.API_KEY) {
+    return res.status(401).json({
+      status: "Invalid key",
     });
-  } else return res.send("Not Valid Token");
+  }
+
+  res.json({
+    status: "Valid",
+    request_info: {
+      method: req.method,
+      path: req.path,
+    },
+    extracted_data: {
+      category: category,
+      id: bookId,
+      language: lang,
+      auth: "Verified",
+    },
+  });
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
+  console.log(`Server running http://localhost:${port}`);
 });
