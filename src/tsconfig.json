@@ -4,6 +4,6 @@
     "outDir": "./dist",
     "rootDir": "./"
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "utils/write-books.tsx", "utils/read-book.ts"],
   "exclude": ["dist"]
 }

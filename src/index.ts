@@ -192,6 +192,7 @@
 //   console.log(`Example app listening on port http://localhost:${port}`);
 // });
 
+<<<<<<< HEAD
 
 
 // app.get("/test", (req, res) => {
@@ -203,6 +204,15 @@
 import express from "express";
 import dotenv from "dotenv";
 
+=======
+// app.get("/test", (req, res) => {
+//   res.send(`Та ${req.path} зам руу ${req.method} хүсэлт илгээлээ`);
+// });
+
+import express from "express";
+import dotenv from "dotenv";
+
+>>>>>>> 6cd21d1327732d0f48d999cc46973a809b35aa05
 dotenv.config();
 
 const app = express();
@@ -237,4 +247,7 @@ app.get("/library/:category/:bookId", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running http://localhost:${port}`);
+
 });
+
+
